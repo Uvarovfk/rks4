@@ -1,5 +1,5 @@
-def calculate_delay(A: List[float], B: List[float], c: float) -> float:
-
+def calculate_delay(a: list[float], b: list[float], c: float) -> float:
+    import numpy as np
     """
     Функция возращает задержку времени на распространение сигнала
 
@@ -8,4 +8,6 @@ def calculate_delay(A: List[float], B: List[float], c: float) -> float:
     :param c: скорость света
 
     """
-    return 2 * np.linalg.norm(A-B)/(c)
+    a1 = np.array(a)
+    b1 = np.array(b)
+    return 2 * (np.linalg.norm(a1 - b1)) / c
