@@ -1,9 +1,9 @@
 from typing import Callable, List
 import numpy as np
 from calculate_delay import calculate_delay
-def Function(T: float, pulse: Callable[[float], complex], Theta: List[List[float]], G: List[List[float]],
-             M: List[List[List[float]]], Tstart:float, dT: float, dis: float, fx: Callable[[float],float],
-             fy: Callable[[float],float], fz: Callable[[float],float]) -> List[List[complex] | int]:
+def Function(T: float, pulse: Callable[[float], complex], w: float, Theta: List[List[float]], G: List[List[float]],
+             M: List[List[List[float]]], Tstart:float, dT: float, dis: float, fx: Callable[[float], float],
+             fy: Callable[[float], float], fz: Callable[[float], float]) -> List[List[complex] | int]:
 
     """
     Функция возращает кортеж из 3 элементов:
@@ -12,10 +12,18 @@ def Function(T: float, pulse: Callable[[float], complex], Theta: List[List[float
      3) номер отсчета начала приема сигнала
 
     :param T: момент времени излучения импульса
+    :param w: частота сигнала
     :param pulse: функция, описывающая импульс радиолокатора
     :param: Theta: матрица состоящая из сдвигов фаз для каждой точки поверхности
     :param: G: матрица состоящая из коэффициента усиления для каждой точки поверхности
     :param M: матрица с координатами(X,Y,Z) каждого элемента матрицы
+    :param Tstart: начальный момент времени
+    :param dT: время излучения импульса
+    :param dis: период дискретизации
+    :param fx: Функция интерполирующая координату x
+    :param fy: Функция интерполирующая координату y
+    :param fz: Функция интерполирующая координату z
+
     """
 
     l = 0  # счетчик
@@ -35,7 +43,7 @@ def Function(T: float, pulse: Callable[[float], complex], Theta: List[List[float
             for k in range(int((T-Tstart)/dis), int((T-Tstart)/dis)+int(delay/dis)+int(dT/dis)+1,1):
                 if T + delay <= Time_Global[k] and Time_Global[k] <= T + delay + dT:
                     Amplitude[l][r][0] = k
-                    Amplitude[l][r][1] = pulse(Time_Global[k] - T - delay, 30/dT) * np.exp(1j * Theta[i][j]) * G[i][j]  # записывается амплитуда принятого сигнала с учетом сдвига по фазе и коэффициента усиления точки поверхности
+                    Amplitude[l][r][1] = pulse(Time_Global[k] - T - delay, w) * np.exp(1j * Theta[i][j]) * G[i][j]  # записывается амплитуда принятого сигнала с учетом сдвига по фазе и коэффициента усиления точки поверхности
                     r = r + 1
             l = l + 1
             r = 0

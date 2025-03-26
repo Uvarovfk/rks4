@@ -1,4 +1,3 @@
-from calculate_delay import calculate_delay
 from Function import Function
 from sinusoidal_pulse import sinusoidal_pulse
 import numpy as np
@@ -57,9 +56,9 @@ fz = interpolate.interp1d(t_Plane, Z_Plane, kind='cubic')
 
 # строим график
 
-a = Function(5, sinusoidal_pulse, Theta, G, M,4., .1, 0.01, fx, fy, fz)[1]
-b = Function(5, sinusoidal_pulse, Theta, G, M,4., .1, 0.01, fx, fy, fz)[2]
-с1 = Function(5, sinusoidal_pulse, Theta, G, M,4, .1, 0.01, fx, fy, fz)[0]
+a = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M,4., .1, 0.01, fx, fy, fz)[1]
+b = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M,4., .1, 0.01, fx, fy, fz)[2]
+с1 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M,4, .1, 0.01, fx, fy, fz)[0]
 go = [0]*a
 for i in range(a):
     go[i] = i+b
