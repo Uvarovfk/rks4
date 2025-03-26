@@ -31,10 +31,14 @@ def Function(T: float, pulse: Callable[[float], complex], w: float, Theta: List[
     n = len(M)
     m = len(M[0])
     Amplitude = np.zeros((n * m, int(dT / dis), 2))  # матрица, содеращая в себе амплитуду и номер отсчета времени приема принятого отраженного сигнала от каждой(всего nxm) точки
+
     v = (fx(T), fy(T), fz(T))  # интерполированное значение координат положения самолета в момент времени T
+
     Time_Global = [0] * 10000  # Вводится список состоящий из мементов времени
+
     for k in range(10000):
         Time_Global[k] = Tstart + dis * k
+
     # запись амплитуды принятого отраженного сигнала в А и соотвеатвующий ей номер отсчета k
 
     for i in range(n):
@@ -56,14 +60,18 @@ def Function(T: float, pulse: Callable[[float], complex], w: float, Theta: List[
         for j in range(int(dT / dis)):
             if Amplitude[i][j][0] >= max_num_samples:
                 max_num_samples = Amplitude[i][j][0]
+
             if min_num_samples is None or Amplitude[i][j][0] <= min_num_samples:
                 if min_num_samples != 0:
                     min_num_samples = Amplitude[i][j][0]
 
     u = int(max_num_samples + 1) - int(min_num_samples)  # длительность приема одного импульса в количестве отсчетов
+
     sum_amplitude = [0] * u  # список состоящий из суммарных амплитуд.
+
     s = 0  # счетчик
     # заполнение списка sum. Kаждая следующая амплитуда соответсвует следующему номеру отсчета k
+
     for i in range(int(min_num_samples), int(max_num_samples + 1), 1):
         for j in range(n * m):
             for k in range(int(dT / dis)):
@@ -72,4 +80,5 @@ def Function(T: float, pulse: Callable[[float], complex], w: float, Theta: List[
         s = s + 1
     # на выходе функции 1) список амплитуд, каждая следующая амплитуда соответсвует следующему номеру отсчета k
     # 2) количество отсчетов 3) номер минимального отсчета(первого отсчета)
+
     return [sum_amplitude, int(max_num_samples - min_num_samples + 1), int(min_num_samples)]
