@@ -31,8 +31,8 @@ def function(t: float,
     :param fz: Функция интерполирующая координату z
 
     """
-    antenna_gain = 100000
-    speed_of_light = 1000.
+    antenna_gain = 100000  # усиление антенны
+    speed_of_light = 1000.  # скорость света
     l1 = 0  # счетчик
     r = 0  # счетчик
     n = len(m_matrix)
@@ -54,7 +54,9 @@ def function(t: float,
                 amplitude[l1][r][0] = k
                 # записывается амплитуда сигнала с учетом сдвига по фазе и коэффициента усиления точки поверхности
                 pulse1 = pulse(time_glob(k, t_start, dis) - t - delay, w)
-                amplitude[l1][r][1] = (4/(delay*speed_of_light)**2)*(antenna_gain * pulse1 * np.exp(1j * theta_matrix[i][j]) * g_matrix[i][j]).real
+                amplitude[l1][r][1] = ((4/(delay*speed_of_light)**2)
+                                       * (antenna_gain * pulse1 * np.exp(1j * theta_matrix[i][j]) *
+                                          g_matrix[i][j]).real)
                 amplitude[l1][r][2] = (antenna_gain * pulse1 * np.exp(1j * theta_matrix[i][j]) * g_matrix[i][j]).imag
                 r += 1
             l1 += 1

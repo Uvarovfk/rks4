@@ -47,11 +47,11 @@ t_Plane = [0] * N  # Список моментов времени, которы�
 
 # заполняем координаты положения самолета
 for i in range(N):
-    X_Plane[i] = 10000
+    X_Plane[i] = 100000
 for i in range(N):
-    Y_Plane[i] = i*20 + 1000
+    Y_Plane[i] = i*200 + 10000
 for i in range(N):
-    Z_Plane[i] = 10000
+    Z_Plane[i] = 100000
 for i in range(N):
     t_Plane[i] = i
 
