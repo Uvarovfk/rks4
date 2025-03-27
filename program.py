@@ -12,7 +12,7 @@ G_matrix = [[0. for z1 in range(m)] for y1 in
 M_matrix = [[[0. for z2 in range(3)] for y2 in range(m)] for x2 in
             range(n)]  # матрица координат точек на поверхности размером nXm, содержащая 3 координаты: X,Y,Z
 Theta_matrix = [[0. for z3 in range(m)] for y3 in
-                range(n)]  # матрица значений Thetta(сдвига фаз в градусах от каждого элемента поверхности)
+                range(n)]  # матрица значений Thetta(сдвига фаз в радианах от каждого элемента поверхности)
 
 # заполняем матрицу M_matrix:
 for i in range(n):
