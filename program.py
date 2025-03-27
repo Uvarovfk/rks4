@@ -8,9 +8,12 @@ import matplotlib.pyplot as plt
 n = 20 # количество строк матрицы G, M и Thetta
 m = 20 # количество столбцов матрицы G, M и Thetta
 
-G = np.zeros((n, m)) # матрица значений G(коэффициента усиления от каждого элемента поверхности)
-M = np.zeros((n, m, 3)) # матрица координат точек на поверхности размером nXm, содержащая 3 координаты: X,Y,Z
-Theta = np.random.rand(n, m) # матрица значений Thetta(сдвига фаз в градусах от каждого элемента поверхности)
+
+
+G = [[0 for z in range(m)] for y in range(n)]  # матрица значений G(коэффициента усиления от каждого элемента поверхности)
+M = [[[0 for z in range(3)] for y in range(m)] for x in range(n)] # матрица координат точек на поверхности размером nXm, содержащая 3 координаты: X,Y,Z
+Theta = [[0 for z in range(m)] for y in range(n)] # матрица значений Thetta(сдвига фаз в градусах от каждого элемента поверхности)
+
 
 # заполняем матрицу M
 for i in range(n):
@@ -56,9 +59,9 @@ fz = interpolate.interp1d(t_Plane, Z_Plane, kind='cubic')
 
 # строим график
 
-a = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M,4., .1, 0.01, fx, fy, fz)[1]
-b = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M,4., .1, 0.01, fx, fy, fz)[2]
-с1 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M,4, .1, 0.01, fx, fy, fz)[0]
+a = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4., .1, 0.01, fx, fy, fz)[1]
+b = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4., .1, 0.01, fx, fy, fz)[2]
+с1 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4, .1, 0.01, fx, fy, fz)[0]
 go = [0]*a
 for i in range(a):
     go[i] = i+b
