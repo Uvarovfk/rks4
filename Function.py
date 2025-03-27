@@ -3,12 +3,12 @@ import numpy as np
 from calculate_delay import calculate_delay
 from Time_glob import time_glob
 
+
 def function(t: float,
              pulse: Callable[[float, float], complex],
              w: float, theta_matrix: List[List[float]], g_matrix: List[List[float]], m_matrix: List[List[List[float]]],
              t_start: float, d_t: float, dis: float, fx: Callable[[float], float],
              fy: Callable[[float], float], fz: Callable[[float], float]) -> List[List[complex] | int | float]:
-
     """
         Функция возращает список из 3 элементов:
      1) список, состоящий из оцифровок суммарной амплитуды принятого сигнала
@@ -20,9 +20,9 @@ def function(t: float,
     :param t: момент времени излучения импульса
     :param w: частота сигнала
     :param pulse: функция, описывающая импульс радиолокатора
-    :param: theta_matrix: матрица состоящая из сдвигов фаз для каждой точки поверхности
-    :param: g_matrix: матрица состоящая из коэффициента усиления для каждой точки поверхности
-    :param: theta_matrix: матрица состоящая из сдвигов фаз для каждой точки поверхности
+    :param theta_matrix: матрица состоящая из сдвигов фаз для каждой точки поверхности
+    :param g_matrix: матрица состоящая из коэффициента усиления для каждой точки поверхности
+    :param m_matrix: матрица состоящая из координат точек на поверхности
     :param t_start: начальный момент времени
     :param d_t: время излучения импульса
     :param dis: период дискретизации
@@ -40,15 +40,15 @@ def function(t: float,
 
     # матрица, содеращая в себе амплитуду и номер отсчета времени приема принятого сигнала от каждой(всего nxm) точки
     amplitude: List[List[List[int | float | complex]]] = [[[0, 0., 0j]
-                                                           for y in range(int(d_t / dis)+1)] for x in range(n*m)]
+                                                           for i in range(int(d_t / dis) + 1)] for j in range(n * m)]
 
     # запись амплитуды принятого отраженного сигнала в А и соответствующий ей номер отсчета k
     for i in range(n):
         for j in range(m):
-            delay = calculate_delay(m_matrix[i][j], vector,  300.)
+            delay = calculate_delay(m_matrix[i][j], vector, 300.)
             t1, t2, t3 = t - t_start, delay, d_t
             # проходимся только по тем k, где будет происходить прием сигнала
-            for k in range(int((t1+t2)/dis), int((t1+t2+t3)/dis), 1):
+            for k in range(int((t1 + t2) / dis), int((t1 + t2 + t3) / dis), 1):
                 # записываем номер отсчета k в список
                 amplitude[l1][r][0] = k
                 # записывается амплитуда сигнала с учетом сдвига по фазе и коэффициента усиления точки поверхности
@@ -80,11 +80,11 @@ def function(t: float,
 
     for i in range(int(min_num_samples), int(max_num_samples + 1), 1):
         for j in range(n * m):
-            for k in range(int(d_t / dis+1)):
+            for k in range(int(d_t / dis + 1)):
                 if int(amplitude[j][k][0]) == i:
                     sum_amplitude[s] = sum_amplitude[s] + amplitude[j][k][1]
         s = s + 1
     # на выходе функции 1) список амплитуд, каждая следующая амплитуда соответсвует следующему номеру отсчета k
     # 2) количество отсчетов 3) момент времени начала приема сигнала
 
-    return [sum_amplitude, int(max_num_samples - min_num_samples + 1), min_num_samples*dis+t_start]
+    return [sum_amplitude, int(max_num_samples - min_num_samples + 1), min_num_samples * dis + t_start]
