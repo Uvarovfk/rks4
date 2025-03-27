@@ -10,29 +10,29 @@ m = 10 # количество столбцов матрицы G, M и Thetta
 
 
 
-G = [[0 for z in range(m)] for y in range(n)]  # матрица значений G(коэффициента усиления от каждого элемента поверхности)
-M = [[[0 for z in range(3)] for y in range(m)] for x in range(n)] # матрица координат точек на поверхности размером nXm, содержащая 3 координаты: X,Y,Z
-Theta = [[0 for z in range(m)] for y in range(n)] # матрица значений Thetta(сдвига фаз в градусах от каждого элемента поверхности)
+G_matrix = [[0 for z in range(m)] for y in range(n)]  # матрица значений G(коэффициента усиления от каждого элемента поверхности)
+M_matrix = [[[0 for z in range(3)] for y in range(m)] for x in range(n)] # матрица координат точек на поверхности размером nXm, содержащая 3 координаты: X,Y,Z
+Theta_matrix = [[0 for z in range(m)] for y in range(n)] # матрица значений Thetta(сдвига фаз в градусах от каждого элемента поверхности)
 
 
-# заполняем матрицу M
+# заполняем матрицу M_matrix:
 for i in range(n):
     for j in range(m):
-        M[i][j][0] = i * 50
-        M[i][j][1] = j * 50
-        M[i][j][2] = 0
+        M_matrix[i][j][0] = i * 50
+        M_matrix[i][j][1] = j * 50
+        M_matrix[i][j][2] = 0
 
-# заполняем матрицу G:
-
-for i in range(n):
-    for j in range(m):
-        G[i][j] = 1
-
-# заполняем матрицу Thetta:
+# заполняем матрицу G_matrix:
 
 for i in range(n):
     for j in range(m):
-        Theta[i][j] = 1
+        G_matrix[i][j] = 1
+
+# заполняем матрицу Thetta_matrix:
+
+for i in range(n):
+    for j in range(m):
+        Theta_matrix[i][j] = 1
 
 N = 10 # количество точек на траектории
 
@@ -59,9 +59,9 @@ fz = interpolate.interp1d(t_Plane, Z_Plane, kind='cubic')
 
 # строим график
 
-a1 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4., .1, 0.01, fx, fy, fz)[1]
-a2 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4., .1, 0.01, fx, fy, fz)[2]
-a3 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4, .1, 0.01, fx, fy, fz)[0]
+a1 = Function(5, sinusoidal_pulse, 0.1/0.01, Theta_matrix, G_matrix, M_matrix, 4., .1, 0.01, fx, fy, fz)[1]
+a2 = Function(5, sinusoidal_pulse, 0.1/0.01, Theta_matrix, G_matrix, M_matrix, 4., .1, 0.01, fx, fy, fz)[2]
+a3 = Function(5, sinusoidal_pulse, 0.1/0.01, Theta_matrix, G_matrix, M_matrix, 4., .1, 0.01, fx, fy, fz)[0]
 go = [0]*a1
 for i in range(a1):
     go[i] = i+a2
