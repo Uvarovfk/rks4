@@ -2,9 +2,10 @@ from Function import function
 from sinusoidal_pulse import sinusoidal_pulse
 from scipy import interpolate
 import matplotlib.pyplot as plt
+import random
 
-n = 10  # количество строк матрицы G, M и Thetta
-m = 10  # количество столбцов матрицы G, M и Thetta
+n = 5  # количество строк матрицы G, M и Thetta
+m = 5  # количество столбцов матрицы G, M и Thetta
 
 G_matrix = [[0. for z1 in range(m)] for y1 in
             range(n)]  # матрица значений G(коэффициента усиления от каждого элемента поверхности)
@@ -23,7 +24,7 @@ for i in range(n):
 # заполняем матрицу G_matrix:
 for i in range(n):
     for j in range(m):
-        G_matrix[i][j] = 1
+        G_matrix[i][j] = random.randint(1, 10)
 
 for i in range(n):
     for j in range(m):
@@ -61,12 +62,12 @@ fy = interpolate.interp1d(t_Plane, Y_Plane, kind='cubic')
 fz = interpolate.interp1d(t_Plane, Z_Plane, kind='cubic')
 
 # строим график
-
-t = 0.1
-dis = 0.01
-d_t = 1.
-w = 5*3.14/d_t
-t_start = 0.
+# задаем необходимые значения
+t = 0.1  # момент времени излучения
+dis = 0.01  # период дискретизации
+d_t = 1.  # длительность импульса
+w = 5*3.14/d_t  # частота импульса
+t_start = 0.  # начальный момент времени
 
 a0 = function(t, sinusoidal_pulse, w, Theta_matrix, G_matrix, M_matrix, t_start, d_t, dis, fx, fy, fz)[0]
 a1 = function(t, sinusoidal_pulse, w, Theta_matrix, G_matrix, M_matrix, t_start, d_t, dis, fx, fy, fz)[1]
@@ -77,6 +78,7 @@ go = [0] * a1
 for i in range(a1):
     go[i] = i + a2
 plt.plot(go, a0)
-print(a1)
-print(a2)
+
+print(a1)  # количество отсчетеов
+print(a2)  # начальный момент приема сигнала
 plt.show()

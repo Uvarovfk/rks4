@@ -7,7 +7,7 @@ def function(t: float,
              pulse: Callable[[float, float], complex],
              w: float, theta_matrix: List[List[float]], g_matrix: List[List[float]], m_matrix: List[List[List[float]]],
              t_start: float, d_t: float, dis: float, fx: Callable[[float], float],
-             fy: Callable[[float], float], fz: Callable[[float], float]) -> List[List[complex] | int | int]:
+             fy: Callable[[float], float], fz: Callable[[float], float]) -> List[List[complex] | int | float]:
 
     """
         Функция возращает список из 3 элементов:
