@@ -5,8 +5,8 @@ from scipy import interpolate
 from numpy import random
 import matplotlib.pyplot as plt
 
-n = 20 # количество строк матрицы G, M и Thetta
-m = 20 # количество столбцов матрицы G, M и Thetta
+n = 40 # количество строк матрицы G, M и Thetta
+m = 10 # количество столбцов матрицы G, M и Thetta
 
 
 
@@ -59,11 +59,11 @@ fz = interpolate.interp1d(t_Plane, Z_Plane, kind='cubic')
 
 # строим график
 
-a = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4., .1, 0.01, fx, fy, fz)[1]
-b = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4., .1, 0.01, fx, fy, fz)[2]
-с1 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4, .1, 0.01, fx, fy, fz)[0]
-go = [0]*a
-for i in range(a):
-    go[i] = i+b
-plt.plot(go, с1)
+a1 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4., .1, 0.01, fx, fy, fz)[1]
+a2 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4., .1, 0.01, fx, fy, fz)[2]
+a3 = Function(5, sinusoidal_pulse, 0.01/0.01, Theta, G, M, 4, .1, 0.01, fx, fy, fz)[0]
+go = [0]*a1
+for i in range(a1):
+    go[i] = i+a2
+plt.plot(go, a3)
 plt.show()
