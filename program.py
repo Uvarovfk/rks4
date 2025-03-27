@@ -32,7 +32,7 @@ for i in range(n):
 
 for i in range(n):
     for j in range(m):
-        Theta_matrix[i][j] = 1
+        Theta_matrix[i][j] = 0
 
 N = 100  # количество точек на траектории
 
