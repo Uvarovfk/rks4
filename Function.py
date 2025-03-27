@@ -52,8 +52,10 @@ def function(t: float,
         for j in range(m):
             delay = calculate_delay(m_matrix[i][j], vector,  1000.)
             t1, t2, t3 = (t - t_start) / dis, delay / dis, d_t / dis
+            # проходимся только по тем k, где будет происходить прием сигнала
             for k in range(int(t1), int(t1) + int(t2) + int(t3) + 1, 1):
                 if t + delay <= time_global[k] and time_global[k] <= t + delay + d_t:
+                    # записываем номер отсчета k в список
                     amplitude[l1][r][0] = k
                     # записывается амплитуда сигнала с учетом сдвига по фазе и коэффициента усиления точки поверхности
                     pulse1 = pulse(time_global[k] - t - delay, w)
