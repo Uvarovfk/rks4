@@ -17,9 +17,9 @@ Theta_matrix = [[0. for z3 in range(m)] for y3 in
 # заполняем матрицу M_matrix:
 for i in range(n):
     for j in range(m):
-        M_matrix[i][j][0] = i * 10
-        M_matrix[i][j][1] = j * 10
-        M_matrix[i][j][2] = 0
+        M_matrix[i][j][0] = i * 1
+        M_matrix[i][j][1] = j * 1
+        M_matrix[i][j][2] = random.randint(0, 1)
 
 # заполняем матрицу G_matrix:
 for i in range(n):
@@ -32,7 +32,7 @@ for i in range(n):
 
 for i in range(n):
     for j in range(m):
-        Theta_matrix[i][j] = 0
+        Theta_matrix[i][j] = random.randint(0, 2)
 
 N = 100  # количество точек на траектории
 
@@ -47,7 +47,7 @@ for i in range(N):
 for i in range(N):
     Y_Plane[i] = i*8000
 for i in range(N):
-    Z_Plane[i] = 50000000
+    Z_Plane[i] = 550000  # высота полета
 for i in range(N):
     t_Plane[i] = i
 
@@ -59,9 +59,9 @@ fz = interpolate.interp1d(t_Plane, Z_Plane, kind='cubic')
 
 # строим график
 # задаем необходимые значения
-t = 1  # момент времени излучения
-d_t = 1. / 1000000000  # длительность импульса в секундах
-dis = d_t / 100  # период дискретизации в секундах
+t = 2  # момент времени излучения
+d_t = 1. / 200000000  # длительность импульса в секундах
+dis = d_t / 300  # период дискретизации в секундах
 
 w = 1*3.1415 / d_t  # частота импульса
 t_start = 0.  # начальный момент времени
