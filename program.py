@@ -4,8 +4,8 @@ from scipy import interpolate
 import matplotlib.pyplot as plt
 import random
 
-n = 5  # количество строк матрицы G_matrix, M_matrix и Thetta_matrix
-m = 5  # количество столбцов матрицы G_matrix, M_matrix и Thetta_matrix
+n = 15  # количество строк матрицы G_matrix, M_matrix и Thetta_matrix
+m = 15  # количество столбцов матрицы G_matrix, M_matrix и Thetta_matrix
 
 G_matrix = [[0. for z1 in range(m)] for y1 in
             range(n)]  # матрица значений коэффициентов усиления от каждого элемента поверхности
@@ -17,26 +17,22 @@ Theta_matrix = [[0. for z3 in range(m)] for y3 in
 # заполняем матрицу M_matrix:
 for i in range(n):
     for j in range(m):
-        M_matrix[i][j][0] = i * 150
-        M_matrix[i][j][1] = j * 150
+        M_matrix[i][j][0] = i * 10
+        M_matrix[i][j][1] = j * 10
         M_matrix[i][j][2] = 0
 
 # заполняем матрицу G_matrix:
 for i in range(n):
     for j in range(m):
-        G_matrix[i][j] = random.randint(1, 10)
+        G_matrix[i][j] = 1
 
-for i in range(n):
-    for j in range(m):
-        if i > int(n/2):
-            G_matrix[i][j] = 10
 
 
 # заполняем матрицу Thetta_matrix:
 
 for i in range(n):
     for j in range(m):
-        Theta_matrix[i][j] = random.randint(0, 1)
+        Theta_matrix[i][j] = 1
 
 N = 100  # количество точек на траектории
 
@@ -49,9 +45,9 @@ t_Plane = [0] * N  # Список моментов времени, которы�
 for i in range(N):
     X_Plane[i] = 100000
 for i in range(N):
-    Y_Plane[i] = i*200 + 10000
+    Y_Plane[i] = i*8000
 for i in range(N):
-    Z_Plane[i] = 100000
+    Z_Plane[i] = 50000000
 for i in range(N):
     t_Plane[i] = i
 
@@ -63,10 +59,11 @@ fz = interpolate.interp1d(t_Plane, Z_Plane, kind='cubic')
 
 # строим график
 # задаем необходимые значения
-t = 10  # момент времени излучения
-dis = 0.01  # период дискретизации
-d_t = 1.  # длительность импульса
-w = 5*3.14/d_t  # частота импульса
+t = 1  # момент времени излучения
+d_t = 1. / 1000000000  # длительность импульса в секундах
+dis = d_t / 100  # период дискретизации в секундах
+
+w = 1*3.1415 / d_t  # частота импульса
 t_start = 0.  # начальный момент времени
 
 a0 = function(t, sinusoidal_pulse, w, Theta_matrix, G_matrix, M_matrix, t_start, d_t, dis, fx, fy, fz)[0]

@@ -31,8 +31,8 @@ def function(t: float,
     :param fz: Функция интерполирующая координату z
 
     """
-    antenna_gain = 100000  # усиление антенны
-    speed_of_light = 1000.  # скорость света
+    antenna_gain = 1000000000.  # усиление антенны
+    speed_of_light = 300000000.  # скорость света
     l1 = 0  # счетчик
     r = 0  # счетчик
     n = len(m_matrix)
