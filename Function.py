@@ -31,7 +31,8 @@ def function(t: float,
     :param fz: Функция интерполирующая координату z
 
     """
-
+    antenna_gain = 100000
+    speed_of_light = 1000.
     l1 = 0  # счетчик
     r = 0  # счетчик
     n = len(m_matrix)
@@ -45,7 +46,7 @@ def function(t: float,
     # запись амплитуды принятого отраженного сигнала в А и соответствующий ей номер отсчета k
     for i in range(n):
         for j in range(m):
-            delay = calculate_delay(m_matrix[i][j], vector, 300.)
+            delay = calculate_delay(m_matrix[i][j], vector, speed_of_light)
             t1, t2, t3 = t - t_start, delay, d_t
             # проходимся только по тем k, где будет происходить прием сигнала
             for k in range(int((t1 + t2) / dis), int((t1 + t2 + t3) / dis), 1):
@@ -53,8 +54,8 @@ def function(t: float,
                 amplitude[l1][r][0] = k
                 # записывается амплитуда сигнала с учетом сдвига по фазе и коэффициента усиления точки поверхности
                 pulse1 = pulse(time_glob(k, t_start, dis) - t - delay, w)
-                amplitude[l1][r][1] = (pulse1 * np.exp(1j * theta_matrix[i][j]) * g_matrix[i][j]).real
-                amplitude[l1][r][2] = (pulse1 * np.exp(1j * theta_matrix[i][j]) * g_matrix[i][j]).imag
+                amplitude[l1][r][1] = (4/(delay*speed_of_light)**2)*(antenna_gain * pulse1 * np.exp(1j * theta_matrix[i][j]) * g_matrix[i][j]).real
+                amplitude[l1][r][2] = (antenna_gain * pulse1 * np.exp(1j * theta_matrix[i][j]) * g_matrix[i][j]).imag
                 r += 1
             l1 += 1
             r = 0

@@ -5,4 +5,4 @@ def sinusoidal_pulse(t: float, w: float) -> complex:
     : param t: момент времени
     : param w: частота сигнала
     """
-    return np.sin(w * t) + 0j
+    return 1
