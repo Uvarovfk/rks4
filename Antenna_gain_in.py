@@ -11,6 +11,7 @@ def antenna_gain_in(vector_a: List[float]) -> float:
     # ниже будет выражен коэффициент усиления в зависимости от углов tetta и fi,
     # в упрощенном виде зависимость сводится не к углам tetta и psi, а углу между OY и vector_a
     r = 1.
+
     x = r * np.sin(thetta_angle) * np.cos(fi_angle)
     y = r * np.sin(thetta_angle) * np.sin(fi_angle)
     z = r * np.cos(thetta_angle)

@@ -2,7 +2,6 @@ from Function import function
 from sinusoidal_pulse import sinusoidal_pulse
 from scipy import interpolate
 import matplotlib.pyplot as plt
-import random
 
 n = 5  # количество строк матрицы G_matrix, M_matrix и Thetta_matrix
 m = 5  # количество столбцов матрицы G_matrix, M_matrix и Thetta_matrix
@@ -52,28 +51,19 @@ t_Plane = [0.] * N  # Список моментов времени, которы
 
 for i in range(N):
     X_plane[i] = 0.
-for i in range(N):
     Y_plane[i] = i * 8000
-for i in range(N):
     Z_plane[i] = 550000  # высота полета
-for i in range(N):
     t_Plane[i] = i
-# заполняем крен, тангаж и рысканье самолета
+    # заполняем крен, тангаж и рысканье самолета
 
-for i in range(N):
     psi_plane[i] = 0.  # расканье самолета
-for i in range(N):
     thetta_plane[i] = 0.  # тангаж самолета
-for i in range(N):
     gamma_plane[i] = 0  # крен самолета
 
-# заполняем крен, тангаж и рысканье радиолокатора
+    # заполняем крен, тангаж и рысканье радиолокатора
 
-for i in range(N):
     psi_radio[i] = 90.  # рысканье радиолокатора
-for i in range(N):
     thetta_radio[i] = -45.  # тангаж радиолокатора
-for i in range(N):
     gamma_radio[i] = 0  # крен радиолокатора
 
 # интерполируем координаты положения самолета
@@ -95,7 +85,7 @@ Thetta_radio = interpolate.interp1d(t_Plane, thetta_radio, kind='linear')
 Gamma_radio = interpolate.interp1d(t_Plane, gamma_radio, kind='linear')
 
 # задаем необходимые значения
-t = 1.  # момент времени излучения
+t = 1.1  # момент времени излучения
 d_t = 1. / 200000000  # длительность импульса в секундах
 dis = d_t / 300  # период дискретизации в секундах
 

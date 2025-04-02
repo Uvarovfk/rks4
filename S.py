@@ -1,4 +1,3 @@
-from typing import List
 
 
 def rotation_matrix(psi: float, thetta: float, gamma: float):
@@ -18,10 +17,13 @@ def rotation_matrix(psi: float, thetta: float, gamma: float):
     s = [[np.cos(psi) * np.cos(gamma) + np.sin(psi) * np.sin(thetta) * np.sin(gamma),
           -np.sin(psi) * np.cos(gamma) + np.cos(psi) * np.sin(thetta) * np.sin(gamma), -np.cos(thetta) * np.sin(gamma)],
          [np.sin(psi) * np.cos(thetta), np.cos(psi) * np.cos(thetta), np.sin(thetta)],
-         [np.cos(psi) * np.sin(gamma) - np.sin(psi) * np.sin(thetta) * np.cos(gamma), -np.sin(psi) * np.sin(gamma) - np.cos(psi) * np.sin(thetta)
+         [np.cos(psi) * np.sin(gamma) - np.sin(psi) * np.sin(thetta) * np.cos(gamma), -np.sin(psi) * np.sin(gamma) -
+          np.cos(psi) * np.sin(thetta)
           * np.cos(gamma),
           np.cos(thetta) * np.cos(gamma)]]
+
     k = np.eye(3)
+
     for i in range(3):
         for j in range(3):
             k[i][j] = s[i][j]

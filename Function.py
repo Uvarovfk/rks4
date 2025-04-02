@@ -70,6 +70,7 @@ def function(t: float,
 
             vector_a_delay = np.array([m_matrix[i][j][0] - vector_delay[0], m_matrix[i][j][1] - vector_delay[1],
                                        m_matrix[i][j][2] - vector_delay[2]])
+
             t1, t2, t3 = t - t_start, delay, d_t
 
             Psi_radio, Thetta_radio, Gamma_radio = psi_radio(t), thetta_radio(t), gamma_radio(t)
@@ -87,9 +88,8 @@ def function(t: float,
                 # записывается амплитуда сигнала с учетом сдвига по фазе и коэффициента усиления точки поверхности
                 pulse1 = pulse(time_glob(k, t_start, dis_period) - t - delay, w)
                 amplitude[l1][r][1] = ((4 / (delay * speed_of_light) ** 2)
-                                       * (antenna_gain_in(vector_a_delay) * antenna_gain_out(
-                            vector_a) * pulse1 * np.exp(1j *
-                                                        theta_matrix[i][j]) * g_matrix[i][j]).real)
+                                       * (antenna_gain_in(vector_a_delay) * antenna_gain_out(vector_a) * pulse1 *
+                                          np.exp(1j * theta_matrix[i][j]) * g_matrix[i][j]).real)
                 amplitude[l1][r][2] = (antenna_gain_in(vector_a_delay) * antenna_gain_out(vector_a) *
                                        pulse1 * np.exp(1j * theta_matrix[i][j]) * g_matrix[i][j]).imag
                 r += 1
