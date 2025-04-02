@@ -6,6 +6,13 @@ from Thetta import thetta
 
 
 def antenna_gain_in(vector_a: List[float]) -> float:
+    """
+    Функция возвращает коэффициент усиления принятого сигнала
+
+    :param vector_a: вектор, соединяющий положение самолета и точку на поверхности в декартовой системе координат
+     в момент излучения
+
+    """
     thetta_angle = thetta(vector_a)
     fi_angle = fi(vector_a)
     # ниже будет выражен коэффициент усиления в зависимости от углов tetta и fi,

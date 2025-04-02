@@ -3,6 +3,13 @@ from typing import List
 
 
 def thetta(vector: List[float]) -> float:
+
+    """
+    Функция возвращает угол тетта в сферических координатах вектора
+
+    :param vector: вектор в декартовой системе координат
+
+    """
     x = vector[0]
     y = vector[1]
     z = vector[2]

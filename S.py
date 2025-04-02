@@ -9,10 +9,12 @@ def rotation_matrix(psi: float, thetta: float, gamma: float):
     :param thetta: угол тангажа; x
     :param y: угол крена; y
     """
-    # ~в радианы перевести в начале функции: сделано
+
     psi = psi * np.pi / 180  # угол относительно курса в радианах
     thetta = thetta * np.pi / 180  # угол тангажа в радианах
     gamma = gamma * np.pi / 180  # угол крена в радианах
+
+    # матрица поворота
 
     s = [[np.cos(psi) * np.cos(gamma) + np.sin(psi) * np.sin(thetta) * np.sin(gamma),
           -np.sin(psi) * np.cos(gamma) + np.cos(psi) * np.sin(thetta) * np.sin(gamma), -np.cos(thetta) * np.sin(gamma)],
@@ -22,7 +24,7 @@ def rotation_matrix(psi: float, thetta: float, gamma: float):
           * np.cos(gamma),
           np.cos(thetta) * np.cos(gamma)]]
 
-    k = np.eye(3)
+    k = np.eye(3)  # создана отдельная numpy матрица
 
     for i in range(3):
         for j in range(3):
